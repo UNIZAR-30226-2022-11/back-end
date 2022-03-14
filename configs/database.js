@@ -1,14 +1,15 @@
 'use strict';
 const mysql = require('mysql');
-require("dotenv").config();
-
-const db = mysql.createPool({
-    connectionLimit: 10,
+const con = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: "",
-    database: 'ajedrez',
-    port: 3306
-});
+    password: "12345",
+    database: "ajedrez"
+  });
+  
+con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
 
-module.exports = db;
+module.exports = con;

@@ -1,6 +1,6 @@
-#CREATE DATABASE ajedrez;
+CREATE DATABASE ajedrez;
 
-CREATE TABLE USUARIO
+CREATE TABLE usuario
 (
    Nickname     VARCHAR(30) PRIMARY KEY,
    contraseña   VARCHAR(30)        NOT NULL,
@@ -19,13 +19,13 @@ CREATE TABLE amigos
    FOREIGN KEY (USUARIO_Nickname) REFERENCES USUARIO(Nickname)
 );
 
-CREATE TABLE PARTIDA
+CREATE TABLE partida
 (
    id        INT PRIMARY KEY,
    ganador   BOOLEAN        NOT NULL
 );
 
-CREATE TABLE ARTICULO
+CREATE TABLE articulo
 (
    nombre   VARCHAR(30) PRIMARY KEY,
    precio   INT        NOT NULL,
