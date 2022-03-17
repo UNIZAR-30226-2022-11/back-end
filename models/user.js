@@ -35,18 +35,30 @@ User.create = (newUser, result) => {
     nickname: newUser.nickname,
     password: newUser.password
   })
+  var sql = "insert into usuario values(Nickname,contraseña)"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+     console.log("1 record inserted");
+   });
   console.log(users)
 };
-User.getUserByNickname = (_nickname) => {
-  var sql = "SHOW TABLES;";
-  con.query(sql, function (err, result) {
-   if (err) throw err;
-    console.log("1 record inserted");
+
+User.getUserByNickname = (_nickname, result) => {
+  var sql =`SELECT * FROM usuario WHERE Nickname = "${_nickname}"`
+  con.query(sql, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if (res.length) {
+      console.log("found user: ", res[0]);
+      result(null, res);
+      return;
+    }
+    // not found Tutorial with the id
+  // result({ kind: "not_found" }, null);
   });
-  return users.find(user => user.nickname === _nickname)
+};
   
-};
-User.getUserById = (_id) => {
-  return users.find(user => user.id === _id)
-};
 module.exports = User;
