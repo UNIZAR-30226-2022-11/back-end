@@ -3,7 +3,7 @@ CREATE DATABASE ajedrez;
 CREATE TABLE usuario
 (
    Nickname     VARCHAR(30) PRIMARY KEY,
-   contraseña   VARCHAR(30)        NOT NULL,
+   contraseña   VARCHAR(100)        NOT NULL,
    puntos       INT        NOT NULL,
    monedas      INT       NOT NULL,
    avatar       VARCHAR(30),
