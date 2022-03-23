@@ -30,6 +30,7 @@ User.getUserByNickname = (_nickname, result) => {
     if (res.length) {
       user = res[0]
       console.log("Usuario encontrado: " + res[0].Nickname);
+      console.log(user)
     }
     else{
       user = null

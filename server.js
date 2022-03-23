@@ -13,8 +13,9 @@ const session = require('express-session')
 
 
 app.use(flash())
+
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: "random",
     resave: false,
     saveUninitialized: false
 }))
@@ -34,4 +35,4 @@ app.use('/', indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
-app.listen(process.env.PORT || 3000)
+app.listen(3000)
