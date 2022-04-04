@@ -3,6 +3,7 @@ const router = express.Router()
 //const User = require('../models/user')
 const passport = require('passport')
 const myPassport = require('../configs/passport')
+const User = require('../models/controller')
 
 
 /*router.post('/', (req, res) => {
@@ -10,7 +11,7 @@ const myPassport = require('../configs/passport')
 })*/
 router.post('/', myPassport.checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/',
+    failureRedirect: '/login',
     failureFlash: true})
 )
 

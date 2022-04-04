@@ -1,0 +1,48 @@
+const Tutorial = require("./user");
+const User = require("./user.js");
+// Create and Save a new Tutorial
+exports.findOne = (req, res) => {
+    User.findById(req.params.Nickname, (err, data) => {
+      console.log("Find")
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Tutorial with id ${req.params.Nickname}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error retrieving Tutorial with id " + req.params.Nickname
+          });
+        }
+      } else res.send(data);
+    });
+  };
+  exports.create = (req, res) => {
+
+    // Validate request
+    if (!req.body) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+    }
+    // Create a Tutorial
+    const user = new User({
+      Nickname : req.body.Nickname,
+      contraseña : req.body.contraseña,
+      puntos : req.body.puntos,
+      monedas : req.body.monedas,
+      avatar : req.body.avatar,
+      piezas : req.body.piezas,
+      tablero : req.body.tablero
+    });
+    console.log(user)
+    // Save Tutorial in the database
+  User.create(user,(err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the Tutorial."
+        });
+      else res.send(data);
+    });
+  };

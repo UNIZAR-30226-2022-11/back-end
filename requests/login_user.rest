@@ -1,7 +1,7 @@
-POST http://localhost:3000/login
+GET http://localhost:5001/login
 Content-Type: application/json
 
 {
-    "nickname": "Vi",
-    "password": "1234"
+    "Nickname": "Pedro2123",
+    "contraseña" : "1234"
 }
