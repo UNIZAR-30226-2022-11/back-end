@@ -1,14 +1,22 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 
-const User = require("../models/user.js");
+//const User = require("../models/user.js");
+const User = require("../models/controller.js");
 
 function initialize(passport) {
   const authenticateUser = async (nickname, password, done) => {
     var user
-    User.getUserByNickname(nickname, user)
+    try{
+      if(await User.findOne(nickname, null, user)){}
+    } catch(e) {
+      console.log("Catch")
+    }
+    
+    console.log(user)
+    console.log("hoa")
     if (user == null) {
-      console.log(user)
+      //console.log(user)
       return done(null, false, { message: 'No user with that nickname' })
     }
 
