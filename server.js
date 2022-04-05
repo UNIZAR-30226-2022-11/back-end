@@ -10,10 +10,15 @@ const myPassport = require('./configs/passport')
 
 const flash = require('express-flash')
 const session = require('express-session')
-const user = require('./models/user')
+const user = require('./models/controller')
 
 
-
+var json ={
+"Nickname": "Pedro2123",
+"contraseña" : "1234"
+}
+var res
+user.findOne(json.Nickname,res)
 app.use(flash())
 
 app.use(session({
