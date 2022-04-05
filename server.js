@@ -7,7 +7,7 @@ const express = require('express')
 const app = express()
 const passport = require('passport')
 const myPassport = require('./configs/passport')
-
+const User = require('./models/controller')
 const flash = require('express-flash')
 const session = require('express-session')
 
@@ -30,7 +30,9 @@ myPassport.initialize(passport)
 const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
-
+var user
+const result =  await User.findOne("Pedro", null,user)
+console.log("esto es " + user)
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
