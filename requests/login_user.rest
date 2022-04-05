@@ -1,7 +1,13 @@
-POST http://localhost:3000/login
+POST  http://localhost:5001/login
 Content-Type: application/json
 
 {
-    "nickname": "Vi",
-    "password": "1234"
+    "Nickname": "Pedro21232",
+    "contraseña": "1234",
+    "puntos": 0,
+    "monedas" : 0,
+    "avatar" : "default",
+    "piezas" : "default",
+    "tablero" : "default"
+
 }
