@@ -1,7 +1,13 @@
-GET http://localhost:5001/login
+POST  http://localhost:5001/login
 Content-Type: application/json
 
 {
-    "Nickname": "Pedro2123",
-    "contraseña" : "1234"
+    "Nickname": "Pedro21232",
+    "contraseña": "1234",
+    "puntos": 0,
+    "monedas" : 0,
+    "avatar" : "default",
+    "piezas" : "default",
+    "tablero" : "default"
+
 }

@@ -2,7 +2,7 @@ POST http://localhost:5001/register
 Content-Type: application/json
 
 {
-    "Nickname": "Pedro21232",
+    "Nickname": "Pedro2123245",
     "contraseña": "1234",
     "puntos": 0,
     "monedas" : 0,

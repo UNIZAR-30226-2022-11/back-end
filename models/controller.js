@@ -2,8 +2,7 @@ const Tutorial = require("./user");
 const User = require("./user.js");
 // Create and Save a new Tutorial
 exports.findOne = (req, res) => {
-    User.findById(req.params.Nickname, (err, data) => {
-      console.log("Find")
+    User.findById(req.body.Nickname, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
@@ -11,7 +10,7 @@ exports.findOne = (req, res) => {
           });
         } else {
           res.status(500).send({
-            message: "Error retrieving Tutorial with id " + req.params.Nickname
+            message: "Error retrieving user with id " + req.params.Nickname
           });
         }
       } else res.send(data);

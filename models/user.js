@@ -23,7 +23,7 @@ User.create = (newUser, result) => {
 
 
 User.findById = (Nickname, result) => {
-  sql.query(`SELECT * FROM usuario WHERE Nickname = ${Nickname}`, (err, res) => {
+  con.query(`SELECT * FROM usuario WHERE Nickname = "${Nickname}"`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);

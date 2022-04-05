@@ -13,14 +13,7 @@ const session = require('express-session')
 const user = require('./models/controller')
 
 
-var json ={
-"Nickname": "Pedro2123",
-"contraseña" : "1234"
-}
-var res
-user.findOne(json.Nickname,res)
 app.use(flash())
-
 app.use(session({
   secret: 'r8q,+&1LM3)CD*zAGpx1xm{NeQhc;#',
   resave: false,
@@ -30,7 +23,7 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-//myPassport.initialize(passport)
+myPassport.initialize(passport)
 
 app.use(express.json()) //Asi en req.body podremos leer objeto json
 
