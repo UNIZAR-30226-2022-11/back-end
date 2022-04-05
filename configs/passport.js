@@ -5,13 +5,10 @@ const User = require("../models/user.js");
 
 function initialize(passport) {
   const authenticateUser = async (nickname, password, done) => {
-    var user
-    User.getUserByNickname(nickname, user)
+    const user = await User.getUserByNickname(nickname)
     if (user == null) {
-      console.log(user)
       return done(null, false, { message: 'No user with that nickname' })
     }
-
     try {
       if (await bcrypt.compare(password, user.password)) {
         //console.log("Error cons")
@@ -27,8 +24,8 @@ function initialize(passport) {
 
   passport.use(new LocalStrategy({ usernameField: 'nickname' }, authenticateUser))
   passport.serializeUser((user, done) => done(null, user.nickname))
-  passport.deserializeUser((nickname, done) => {
-    return done(null, User.getUserByNickname(nickname))
+  passport.deserializeUser(async (nickname, done) => {
+    return done(null, await User.getUserByNickname(nickname))
   })
 }
 

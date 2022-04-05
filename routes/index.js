@@ -3,7 +3,8 @@ const router = express.Router()
 const myPassport = require('../configs/passport')
 
 router.get('/', myPassport.checkAuthenticated, (req, res) => {
-    console.log(req.user.nickname)
+    console.log("Get: Home page")
+    console.log(req.user)
     res.send("Get: Home page")
 })
 

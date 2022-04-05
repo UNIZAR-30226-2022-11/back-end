@@ -11,6 +11,21 @@ const User = function(user) {
   this.tablero = user.tablero;
 };
 
+let query = function( sql, values ) {
+  // devolver una promesa
+return new Promise(( resolve, reject ) => {
+ 
+ con.query(sql,(err, res) => {
+  if ( err ) {
+    if (err) throw err;
+    reject( err )
+  } else {
+    resolve( res )
+  }
+});
+})
+}
+
 User.create = (_nickname, _password, result) => {
   var sql = "insert into usuario(Nickname,contraseña,puntos,monedas,avatar,piezas,tablero) values (\"" + 
     _nickname + "\", \"" +
@@ -21,20 +36,15 @@ User.create = (_nickname, _password, result) => {
   });
 };
 
-User.getUserByNickname = (_nickname, result) => {
-  console.log("Empieza")
+User.getUserByNickname = async (_nickname, result) => {
   var sql ="SELECT * FROM usuario WHERE Nickname = \"" + _nickname + "\""
-  var user
-  con.query(sql, (err, res) => {
-    if (err) throw err;
-    if (res.length) {
-      user = res[0]
-      console.log("Usuario encontrado: " + res[0].Nickname);
-    }
-    else{
-      user = null
-    }
-  });
+  let rows = await query(sql)
+  
+  const user = new User({
+    nickname: rows[0].Nickname,
+    password : rows[0].contraseña
+  })
+
   return user
 };
   
