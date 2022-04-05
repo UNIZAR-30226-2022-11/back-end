@@ -6,6 +6,7 @@ const User = require("../models/user.js");
 function initialize(passport) {
   const authenticateUser = async (nickname, password, done) => {
     var user
+      console.log("hol")
     User.getUserByNickname(nickname, user)
     if (user == null) {
       console.log(user)
