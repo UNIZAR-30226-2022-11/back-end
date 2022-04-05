@@ -22,7 +22,7 @@ function initialize(passport) {
 
     try {
       if (await bcrypt.compare(password, user.password)) {
-        //console.log("Error cons")
+        console.log("Error cons")
         return done(null, user)
       } else {
         //console.log("Error cons")
@@ -33,14 +33,19 @@ function initialize(passport) {
     }
   }
 
-  passport.use(new LocalStrategy({ usernameField: 'nickname' }, authenticateUser))
-  passport.serializeUser((user, done) => done(null, user.nickname))
-  passport.deserializeUser((nickname, done) => {
-    return done(null, User.getUserByNickname(nickname))
+ const strategy = new LocalStrategy({ usernameField: 'Nickname' ,passwordField: 'Contraseña'}, authenticateUser)
+  //passport.use(strategy)
+  
+  
+
+  passport.serializeUser((user, done) => done(null, user.Nickname))
+  passport.deserializeUser((Nickname, done) => {
+    return done(null, User.findOne(Nickname))
   })
-}
+
 
 function checkAuthenticated(req, res, next) {
+  console.log("Aqui")
   if (req.isAuthenticated()) {
     return next()
   }
@@ -52,4 +57,4 @@ function checkNotAuthenticated(req, res, next) {
   }
 }
 
-module.exports = {initialize, checkAuthenticated, checkNotAuthenticated}
+module.exports = { checkAuthenticated, checkNotAuthenticated}

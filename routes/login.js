@@ -3,6 +3,7 @@ const router = express.Router()
 //const User = require('../models/user')
 const passport = require('passport')
 const myPassport = require('../configs/passport')
+const User = require('../models/controller')
 
 
 /*router.post('/', (req, res) => {

@@ -25,11 +25,15 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
     "mysql": "^2.18.1",
+<<<<<<< HEAD
+    "socket.io": "^4.4.1"
+=======
     "passport": "^0.5.2",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
     "nodemon": "^2.0.15"
+>>>>>>> bf4a3c74169193c20f5763ae69cb6394a6be6e0d
   }
 }

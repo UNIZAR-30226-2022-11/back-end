@@ -47,5 +47,9 @@ exports.findOne = async (req, res, user) => {
         });
       else res.send(data);
     });
+<<<<<<< HEAD
   };
 
+=======
+  };
+>>>>>>> 89e7601be789c9179725b920aef4b7b9ff8520b9
