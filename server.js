@@ -1,4 +1,3 @@
-
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
@@ -7,15 +6,14 @@ const express = require('express')
 const app = express()
 const passport = require('passport')
 const myPassport = require('./configs/passport')
-const User = require('./models/controller')
+
 const flash = require('express-flash')
 const session = require('express-session')
 
 
 app.use(flash())
-
 app.use(session({
-    secret: "random",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }))
@@ -30,10 +28,9 @@ myPassport.initialize(passport)
 const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
-var user
-console.log("esto es " + user)
+
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
