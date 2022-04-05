@@ -1,0 +1,7 @@
+GET http://localhost:5001/login
+Content-Type: application/json
+
+{
+    "Nickname": "Pedro2123",
+    "contraseña" : "1234"
+}

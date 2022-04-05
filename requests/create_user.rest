@@ -1,0 +1,13 @@
+POST http://localhost:5001/register
+Content-Type: application/json
+
+{
+    "Nickname": "Pedro21232",
+    "contraseña": "1234",
+    "puntos": 0,
+    "monedas" : 0,
+    "avatar" : "default",
+    "piezas" : "default",
+    "tablero" : "default"
+
+}

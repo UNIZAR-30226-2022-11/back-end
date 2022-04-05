@@ -1,4 +1,6 @@
-
-   
 'use strict';
-let connection = require('./db.mysql.js');
+var con = require('../configs/database.js')
+con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
