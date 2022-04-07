@@ -10,6 +10,7 @@ const myPassport = require('./configs/passport')
 const flash = require('express-flash')
 const session = require('express-session')
 
+require('./configs/socket')
 
 app.use(flash())
 app.use(session({
@@ -34,3 +35,4 @@ app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
 app.listen(process.env.PORT || 3000)
+
