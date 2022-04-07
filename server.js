@@ -13,7 +13,7 @@ const session = require('express-session')
 
 app.use(flash())
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: "secret",
     resave: false,
     saveUninitialized: false
 }))
@@ -29,7 +29,7 @@ const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 
-app.use('/', indexRouter)
+app.use(indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
