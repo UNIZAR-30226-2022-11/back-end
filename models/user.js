@@ -1,5 +1,11 @@
 var con = require('../configs/database')
+function isObjEmpty(obj) {
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) return false;
+  }
 
+  return true;
+}
 // constructor
 class User {
   constructor(user) {
@@ -14,21 +20,22 @@ class User {
   static async create(_nickname, _password, result) {
     var comprobar = "SELECT * FROM usuario WHERE Nickname = \"" + _nickname + "\"";
     let rows = await query(comprobar);
-    console.log(rows)
-    if(rows.hasOwnProperty()){
-      console.log("Paraa")
+    let vacio = isObjEmpty(rows)
+    if(vacio == true){
+      console.log("Entra aqui")
       var sql = "insert into usuario(Nickname,contraseña,puntos,monedas,avatar,piezas,tablero) values (\"" +
       _nickname + "\", \"" +
       _password + "\", " +
       "0, 0, 0, 0, 0);";
-    con.query(sql, function (err, result) {
-      if (err)
-        throw err;
-    });
-      result = true
-    }else{
+      console.log(result)
+      await query(sql)
+      return true
       
-      result = false
+      
+      
+    }
+    else{    
+      return false 
     }
     
   }

@@ -12,15 +12,14 @@ const myPassport = require('../configs/passport')
 router.post('/', myPassport.checkNotAuthenticated, async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        var existe=true
-        let crear = User.create(req.body.nickname, hashedPassword,existe);
-        console.log(existe)
-        if(!existe){
+        
+        var exito = await User.create(req.body.nickname, hashedPassword,exito);
+        if(exito){
             respuesta ={
                 "exito": true,
                 "user" : req.body
             }
-            res.send(res)
+            res.send(respuesta)
         }
        else{
         respuesta ={
