@@ -11,7 +11,10 @@ const myPassport = require('../configs/passport')
 router.post('/', myPassport.checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
-    failureFlash: true})
+    failureFlash: true,
+    send
+        })
+    
 )
 
 

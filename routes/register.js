@@ -10,13 +10,27 @@ const myPassport = require('../configs/passport')
 })*/
 
 router.post('/', myPassport.checkNotAuthenticated, async (req, res) => {
-    try {
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        User.create(req.body.nickname, hashedPassword, (err, data) => {});
-        res.send("Usuario creado")
-      } catch {
-        res.send('Error al crear usuario')
-    }
+        var existe=true
+        let crear = User.create(req.body.nickname, hashedPassword,existe);
+        console.log(existe)
+        if(!existe){
+            respuesta ={
+                "exito": true,
+                "user" : req.body
+            }
+            res.send(res)
+        }
+       else{
+        respuesta ={
+            "exito": false,
+            "user" : req.body
+        }
+        res.send(respuesta)
+       }
+
+        
 })
 
 module.exports = router

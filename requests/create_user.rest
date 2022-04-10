@@ -1,7 +1,7 @@
-POST http://ec2-54-91-148-78.compute-1.amazonaws.com:3000/register
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "nickname": "QWER",
+    "nickname": "QWERdaed",
     "password": "1234"
 }
