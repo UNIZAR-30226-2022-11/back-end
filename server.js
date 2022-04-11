@@ -30,7 +30,7 @@ const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 
-app.use(indexRouter)
+app.use('/:nickname',indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 

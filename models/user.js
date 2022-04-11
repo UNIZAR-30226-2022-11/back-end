@@ -40,9 +40,14 @@ class User {
     
   }
   static async getUserByNickname(_nickname, result) {
+
+    
     var sql = "SELECT * FROM usuario WHERE Nickname = \"" + _nickname + "\"";
+    
     let rows = await query(sql);
-    if(rows.hasOwnProperty()){
+    let vacio = isObjEmpty(rows)
+    if (vacio == false){
+      console.log(rows)
       const user = new User({
         nickname: rows[0].Nickname,
         password: rows[0].contraseña
@@ -52,9 +57,27 @@ class User {
     else{
       return null
     }
-
-   
   }
+  static async getFriends(nickname){
+    //var sql1= "insert into amigos(valor,USUARIO_Nickname) values ("jorge","pedroaibar23")"
+    //await query(sql1)
+    console.log(nickname)
+    var sql = "SELECT valor FROM amigos WHERE USUARIO_Nickname = \"" + nickname + "\" "
+    let rows  = await query(sql)
+    let vacio = isObjEmpty(rows)
+    
+    if(!vacio){
+      let amigos = {
+        "nickname" : rows[0].valor
+      }
+      console.log(amigos)
+      return rows
+    }
+    else{
+      return null
+    }
+  }
+ 
 }
 
 let query = function( sql, values ) {
