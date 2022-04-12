@@ -50,7 +50,12 @@ class User {
       console.log(rows)
       const user = new User({
         nickname: rows[0].Nickname,
-        password: rows[0].contraseña
+        password: rows[0].contraseña,
+        puntos: rows[0].puntos,
+        monedas: rows[0].monedas,
+        avatar: rows[0].avatar,
+        piezas: rows[0].piezas,
+        tablero: rows[0].tablero
       });
       return user;
     }
