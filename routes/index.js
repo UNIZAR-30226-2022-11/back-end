@@ -14,6 +14,4 @@ router.get('/',async  (req,res) => {
     let amigos =  await User.getFriends(req.query.nickname)
     res.send(amigos)
 })
-
-
 module.exports = router

@@ -7,12 +7,12 @@ const app = express()
 const passport = require('passport')
 const myPassport = require('./configs/passport')
 
-const flash = require('express-flash')
+//const flash = require('express-flash')
 const session = require('express-session')
-
+const cors = require('cors')
 require('./configs/socket')
 
-app.use(flash())
+app.use(cors())
 app.use(session({
     secret: "secret",
     resave: false,
@@ -30,7 +30,7 @@ const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 
-app.use('/:nickname',indexRouter)
+app.use(indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 
