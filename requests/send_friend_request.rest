@@ -1,0 +1,7 @@
+POST http://localhost:3000/friendRequest
+Content-Type: application/json
+
+{
+    "nickname": "pedroaibar23",
+    "amigo": "jorge"
+}

@@ -29,10 +29,12 @@ myPassport.initialize(passport)
 const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
+const friendRequestRouter = require('./routes/friendRequest')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
+app.use('/friendRequest', friendRequestRouter)
 
 app.listen(process.env.PORT || 3000)
 

@@ -17,7 +17,15 @@ CREATE TABLE amigos
    valor              VARCHAR(30),
    USUARIO_Nickname   VARCHAR(30),
    PRIMARY KEY (valor,USUARIO_Nickname),
-   FOREIGN KEY (USUARIO_Nickname) REFERENCES USUARIO(Nickname)
+   FOREIGN KEY (USUARIO_Nickname) REFERENCES usuario(Nickname)
+);
+
+CREATE TABLE peticiones_amigos
+(
+   valor              VARCHAR(30),
+   USUARIO_Nickname   VARCHAR(30),
+   PRIMARY KEY (valor,USUARIO_Nickname),
+   FOREIGN KEY (USUARIO_Nickname) REFERENCES usuario(Nickname)
 );
 
 CREATE TABLE partida
@@ -38,8 +46,8 @@ CREATE TABLE juega
    USUARIO_Nickname   VARCHAR(30),
    PARTIDA_id         INT,
    PRIMARY KEY (USUARIO_Nickname,PARTIDA_id),
-   FOREIGN KEY (USUARIO_Nickname) REFERENCES USUARIO(Nickname),
-   FOREIGN KEY (PARTIDA_id) REFERENCES PARTIDA(id)
+   FOREIGN KEY (USUARIO_Nickname) REFERENCES usuario(Nickname),
+   FOREIGN KEY (PARTIDA_id) REFERENCES partida(id)
 );
 
 CREATE TABLE compra
@@ -47,7 +55,7 @@ CREATE TABLE compra
    USUARIO_Nickname   VARCHAR(30),
    ARTICULO_nombre   VARCHAR(30),
    PRIMARY KEY (USUARIO_Nickname,ARTICULO_nombre),
-   FOREIGN KEY (USUARIO_Nickname) REFERENCES USUARIO(Nickname),
-   FOREIGN KEY (ARTICULO_nombre) REFERENCES ARTICULO(nombre)
+   FOREIGN KEY (USUARIO_Nickname) REFERENCES usuario(Nickname),
+   FOREIGN KEY (ARTICULO_nombre) REFERENCES articulo(nombre)
 );
 
