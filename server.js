@@ -36,5 +36,6 @@ app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 app.use('/friendRequest', friendRequestRouter)
 
-app.listen(process.env.PORT || 3000)
+const server = app.listen(process.env.PORT || 3000)
 
+module.exports = { app, server }

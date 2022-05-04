@@ -17,6 +17,17 @@ class User {
     this.piezas = user.piezas;
     this.tablero = user.tablero;
   }
+
+  static async delete_user(_nickname) {
+    console.log("Se va a borrar al usuario "+_nickname)
+
+    await query("DELETE FROM amigos WHERE USUARIO_Nickname = \"" + _nickname + "\" OR valor = \"" + _nickname + "\"")
+    await query("DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + _nickname + "\" OR valor = \"" + _nickname + "\"")
+    await query("DELETE FROM juega WHERE USUARIO_Nickname = \"" + _nickname + "\"")
+    //Creo que falta de alguna tabla
+    await query("DELETE FROM usuario WHERE Nickname = \"" + _nickname + "\"")
+  }
+
   static async create(_nickname, _password, result) {
     var comprobar = "SELECT * FROM usuario WHERE Nickname = \"" + _nickname + "\"";
     let rows = await query(comprobar);
@@ -103,6 +114,8 @@ class User {
   }
 
   static async addToFriendsRequests(user, friend){//Si ya tiene una solicitud pendiente tuya????
+    console.log(user)
+    console.log(friend)
     var sql = "SELECT * FROM usuario WHERE Nickname = \"" + user + "\" "
     let result  = await query(sql)
     
