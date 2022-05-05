@@ -10,7 +10,7 @@ const myPassport = require('./configs/passport')
 //const flash = require('express-flash')
 const session = require('express-session')
 const cors = require('cors')
-require('./configs/socket')
+const io = require('./configs/socket')
 
 app.use(cors())
 app.use(session({
@@ -37,5 +37,7 @@ app.use('/register', registerRouter)
 app.use('/friendRequest', friendRequestRouter)
 
 const server = app.listen(process.env.PORT || 3000)
+
+io.attach(server);
 
 module.exports = { app, server }

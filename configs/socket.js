@@ -1,12 +1,14 @@
-const io = require('socket.io')(4000, {
+/*const io = require('socket.io')(4000, {
     cors: {
-        origin: ["http://localhost:3000"],
+        origin: ["http://localhost:4200"],
     },
-})
+})*/
+const io = require('socket.io')()
 
 let jugadoresEspera = []
 
 io.on('connection', socket => {  
+    console.log('new connection');
     jugador = jugadoresEspera.pop()
     if(!jugador){
         jugadoresEspera.push(socket.id)
@@ -16,15 +18,18 @@ io.on('connection', socket => {
         console.log(socket.id)
         console.log(jugador)
         //Enviamos a los jugadores su oponente
-        socket.emit('getOpponent', jugador)
-        socket.to(jugador).emit('getOpponent', socket.id)
+        socket.emit('getOpponent', { id: jugador, side: 0})
+        socket.to(jugador).emit('getOpponent', { id: socket.id, side: 1})
     }
     
-    socket.on('sendGameMove', (move, opponent) =>{
+    socket.on('sendGameMove', (opponent, moveFI, moveCI, moveFF, moveCF) =>{
         //Enviamos movimiento al oponente
-        socket.to(opponent).emit('getGameMove', move)
+        console.log("Ha llegado sendGameMove, enviando movimiento: " +moveFI + ", " + moveCI + ", ", moveFF + ", ", moveCF + " a jugador " + opponent)
+        socket.to(opponent).emit('getGameMove', { op: opponent, fI: moveFI, cI: moveCI, fF: moveFF, cF: moveCF})
     })
 })
+
+module.exports = io
 
 //Mensaje de movimiento
     //Se ver de que pareja de jugadores pertenece, asi que se lo mando al otro
