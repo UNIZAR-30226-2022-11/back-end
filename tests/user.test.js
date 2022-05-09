@@ -1,4 +1,5 @@
 const supertest = require('supertest')
+const { addFriend } = require('../models/user')
 const {app, server} = require('../server')
 
 
@@ -18,7 +19,10 @@ const friendRequest = {
         nickname: 'user1',
         amigo: 'user2'
     }
-
+const addFriend1 = {
+    nickname: 'user1',
+    amigo: 'user2'
+}
 beforeAll(async () => {
     //return initializeCityDatabase();
     const User = require('../models/user')
@@ -64,7 +68,15 @@ test('Lista de peticiones de amistad', async () => {
     
     expect(response.body[0].valor).toBe(user1.nickname)
 })
-
+test('Añadir peticiones de amistad', async () => {
+    const response = await api
+        .post('/addFriends')
+        .send(addFriend1)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+    //console.log(response.body)
+    expect(response.body.resultado).toBe('Se ha anyadido corectamente')
+})
 afterAll(() => {
     server.close()
     //Cerrar sockets y BD

@@ -30,14 +30,18 @@ const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 const friendRequestRouter = require('./routes/friendRequest')
+const addFriendRouter = require('./routes/addFriend')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 app.use('/friendRequest', friendRequestRouter)
+app.use('/addFriend',addFriendRouter)
 
 const server = app.listen(process.env.PORT || 3000)
 
 io.attach(server);
 
 module.exports = { app, server }
+
+
