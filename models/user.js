@@ -166,7 +166,7 @@ class User {
   static async declineFriendRequest(user,friend){
     let existePeticion = await this.getFriendsRequests(user)
     if(existePeticion != null ){
-      let queryDeleteRequest = "DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + user + "\" "
+      let queryDeleteRequest = "DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + user + "\" AND valor=\"" + friend + "\"" 
       let deleteRequest = await query(queryDeleteRequest)
       return true
     } 
