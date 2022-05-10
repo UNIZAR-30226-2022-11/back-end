@@ -1,0 +1,7 @@
+POST http://localhost:3000/declineFriendRequest
+Content-Type: application/json
+
+{
+    "nickname" : "user1",
+    "amigo" : "pedro"
+}

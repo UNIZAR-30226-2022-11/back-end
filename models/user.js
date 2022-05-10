@@ -59,7 +59,7 @@ class User {
     let rows = await query(sql);
     let vacio = isObjEmpty(rows)
     if (vacio == false){
-      console.log(rows)
+      //console.log(rows)
       const user = new User({
         nickname: rows[0].Nickname,
         password: rows[0].contraseña,
@@ -145,32 +145,37 @@ class User {
       return "El usuario no existe"
     }
   }
-  static async addFriend(user,friend){
-    console.log("Se va a intentar añadir al usuario " + friend + " como amigo de " + user)
-    let existeUser = await this.getUserByNickname(user)
-    let existeFriend = await this.getUserByNickname(friend)
-    console.log(existeUser)
-    if(existeFriend != null && existeUser != null ){
-      console.log("entra")
-      let queryEsAmigo = "SELECT * FROM amigos WHERE USUARIO_Nickname = \"" + user + "\" AND valor=\"" + friend + "\"";
-      let esAmigo = await query(queryEsAmigo)
-      if(isObjEmpty(esAmigo)){
+  static async acceptFriendRequest(user,friend){
+    console.log("Se va a intentar aceptar la solicitud de amistad de " + friend + " como amigo de " + user)
+    
+    let existePeticion = await this.getFriendsRequests(user)
+    if(existePeticion != null ){
           let queryAddFriend1 = "INSERT INTO amigos (valor, USUARIO_Nickname) VALUES (\""+user+"\", \""+friend+"\") ;"
           let queryAddFriend2 = "INSERT INTO amigos (USUARIO_Nickname,valor) VALUES (\""+user+"\", \""+friend+"\") ;"
+          let queryDeleteRequest = "DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + user + "\" "
+          let deleteRequest = await query(queryDeleteRequest)
           let esAmigo = await query(queryAddFriend1)
           let esAmigo1 = await query(queryAddFriend2)
-          return "Se ha anyadido corectamente"
-      }
-      else{
-        return "El amigo ya es amigo tuyo"
-      }
+          return true
     }
-    else{
-      return "Alguno de los usuarios no existe"
+      else{
+        return false
+     
     }
   }
-}
+  static async declineFriendRequest(user,friend){
+    let existePeticion = await this.getFriendsRequests(user)
+    if(existePeticion != null ){
+      let queryDeleteRequest = "DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + user + "\" "
+      let deleteRequest = await query(queryDeleteRequest)
+      return true
+    } 
+    else {
+      return false
+    }
 
+  }
+}
 let query = function( sql, values ) {
   // devolver una promesa
 return new Promise(( resolve, reject ) => {

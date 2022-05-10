@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     console.log(req.body.nickname, req.body.amigo)
     res.setHeader('Content-Type', 'application/json');
     respuesta = {
-        "resultado": await User.addFriend(req.body.nickname, req.body.amigo)
+        "exito": await User.declineFriendRequest(req.body.nickname, req.body.amigo)
     }
     res.send(respuesta)
 })

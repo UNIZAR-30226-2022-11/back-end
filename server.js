@@ -30,14 +30,17 @@ const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 const friendRequestRouter = require('./routes/friendRequest')
-const addFriendRouter = require('./routes/addFriend')
+const acceptFriendRequestRouter = require('./routes/acceptFriendRequest')
+const declineFriendRequestRouter = require('./routes/declineFriendRequest')
+const matchHistoryRouter = require('./routes/matchHistory')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 app.use('/friendRequest', friendRequestRouter)
-app.use('/addFriend',addFriendRouter)
-
+app.use('/acceptFriendRequest',acceptFriendRequestRouter)
+app.use('/declineFriendRequest',declineFriendRequestRouter)
+app.use('/matchHistory',matchHistoryRouter)
 const server = app.listen(process.env.PORT || 3000)
 
 io.attach(server);

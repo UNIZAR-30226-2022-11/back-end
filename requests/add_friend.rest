@@ -1,7 +1,7 @@
-POST http://localhost:3000/addFriend
+POST http://localhost:3000/acceptFriendRequest
 Content-Type: application/json
 
 {
-    "nickname": "pedro",
-    "amigo": "user1"
+    "nickname" : "pedroaibar",
+    "amigo" : "pedro"
 }
