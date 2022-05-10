@@ -30,24 +30,20 @@ CREATE TABLE peticiones_amigos
 
 CREATE TABLE partida
 (
-   id        INT PRIMARY KEY,
-   ganador   BOOLEAN        NOT NULL
+   id          INT AUTO_INCREMENT PRIMARY KEY,
+   Nickname_1  VARCHAR(30) NOT NULL,
+   Nickname_2  VARCHAR(30) NOT NULL,
+   ganador     BOOLEAN,
+   FOREIGN KEY (Nickname_1) REFERENCES usuario(Nickname),
+   FOREIGN KEY (Nickname_2) REFERENCES usuario(Nickname)
 );
+
 
 CREATE TABLE articulo
 (
    nombre   VARCHAR(30) PRIMARY KEY,
    precio   INT        NOT NULL,
    tipo     VARCHAR(30)        NOT NULL
-);
-
-CREATE TABLE juega
-(
-   USUARIO_Nickname   VARCHAR(30),
-   PARTIDA_id         INT,
-   PRIMARY KEY (USUARIO_Nickname,PARTIDA_id),
-   FOREIGN KEY (USUARIO_Nickname) REFERENCES usuario(Nickname),
-   FOREIGN KEY (PARTIDA_id) REFERENCES partida(id)
 );
 
 CREATE TABLE compra

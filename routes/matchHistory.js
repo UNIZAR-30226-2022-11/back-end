@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const myPassport = require('../configs/passport')
-const User = require('../models/user')
+const Match = require('../models/match')
 
 router.get('/', async (req, res) => {
-    console.log(req.query.nickname)
     res.setHeader('Content-Type', 'application/json');
-    respuesta = {
-        "resultado": await User.matchHistory(req.query.nickname)
-    }
-    res.send(respuesta)
+    res.send(await Match.getMatchHistory(req.query.nickname))
 })
+
+router.post('/', async (req, res) => {
+    await Match.addMatch(req.body.nickname_1, req.body.nickname_2, req.body.ganador)
+})
+
 module.exports = router
