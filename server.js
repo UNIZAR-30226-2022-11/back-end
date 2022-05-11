@@ -34,6 +34,7 @@ const friendRequestRouter = require('./routes/friendRequest')
 const acceptFriendRequestRouter = require('./routes/acceptFriendRequest')
 const declineFriendRequestRouter = require('./routes/declineFriendRequest')
 const matchHistoryRouter = require('./routes/matchHistory')
+const saveMatchResultRouter = require('./routes/saveMatchResult')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
@@ -43,6 +44,7 @@ app.use('/friendRequest', friendRequestRouter)
 app.use('/acceptFriendRequest',acceptFriendRequestRouter)
 app.use('/declineFriendRequest',declineFriendRequestRouter)
 app.use('/matchHistory',matchHistoryRouter)
+app.use('/saveMatchResult',saveMatchResultRouter)
 const server = app.listen(process.env.PORT || 3000)
 
 io.attach(server);

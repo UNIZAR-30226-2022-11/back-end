@@ -1,0 +1,8 @@
+POST http://localhost:3000/saveMatchResult
+Content-Type: application/json
+
+{
+    "nickname": "user1",
+    "rival": "pedroaibar23",
+    "result": "win"
+}

@@ -37,6 +37,32 @@ class Match {
         var sql = "INSERT INTO partida(Nickname_1,Nickname_2,ganador) VALUES (\"" + nickname_1 + "\", \"" + nickname_2 + "\", " + ganador + ");"
         await query(sql)
     }
+    static async updateCoinsPoints(nickname,points,coins){
+        var sql = "UPDATE usuario SET puntos = puntos + " + points + ",monedas = monedas + " + coins + " WHERE Nickname = \"" + nickname + "\""
+        await query(sql)
+    }
+    static async saveMatch(nickname,rival,result){
+        
+        if (result == "win") {
+            this.addMatch(nickname,rival,false)
+            this.updateCoinsPoints(nickname,5,1)
+            this.updateCoinsPoints(rival,-5,0)
+            return true
+        }
+        else if(result == "lose") {
+            this.addMatch(nickname,rival,true)
+            this.updateCoinsPoints(rival,5,1)
+            this.updateCoinsPoints(nickname,-5,0)
+            return true
+        }
+        else if (result == "draw") {   
+            this.addMatch(nickname,rival,null)
+            return true
+        }
+        else {
+            return false
+        }
+    }
 }
 
 function isObjEmpty(obj) {
