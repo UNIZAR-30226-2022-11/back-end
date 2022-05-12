@@ -175,6 +175,60 @@ class User {
     }
 
   }
+  static async getCoins(nickname){
+    var coinsQuery = "SELECT monedas FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    const coins = await query(coinsQuery)
+    if(!isObjEmpty(coins)){
+      console.log(coins)
+      let valor = coins[0].monedas
+      console.log(valor)
+      let  monedas = {
+        "coins" : valor
+      }
+      return monedas
+    }
+    else{
+      let fracaso = {
+        "exito" : false
+      }
+      return fracaso
+    }
+  }
+  static async getPoints(nickname){
+    var pointsQuery = "SELECT puntos FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    const points = await query(pointsQuery)
+    if(!isObjEmpty(points)){
+      console.log(points)
+      let valor = points[0].puntos
+      console.log(valor)
+      let  monedas = {
+        "points" : valor
+      }
+      return monedas
+    }
+    else{
+      let fracaso = {
+        "exito" : false
+      }
+      return fracaso
+    }
+  }
+  static async getRankingList(nickname){
+    var getRankingListTopQuery = "SELECT Nickname,puntos FROM usuario WHERE Nickname IN(SELECT valor FROM amigos WHERE USUARIO_Nickname=\"" + nickname + "\") GROUP BY Nickname ORDER BY puntos DESC LIMIT 3";
+    var getRankingListBottomQuery = "SELECT Nickname,puntos FROM usuario WHERE Nickname IN(SELECT valor FROM amigos WHERE USUARIO_Nickname=\"" + nickname + "\") GROUP BY Nickname ORDER BY puntos LIMIT 3";
+    var getUser = "SELECT Nickname,puntos FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    let listTop = await query(getRankingListTopQuery)
+    let listBottom = await query(getRankingListBottomQuery)
+    let listUser = await query(getUser)
+    console.log(listTop[1])
+    let respuesta = [
+      listTop[0],listTop[1],listTop[2],
+      listUser[0],listBottom[2],listBottom[1],
+      listBottom[0]
+    ]
+    console.log(respuesta)
+    return respuesta
+  }
 }
 let query = function( sql, values ) {
   // devolver una promesa

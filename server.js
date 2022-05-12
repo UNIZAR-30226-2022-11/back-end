@@ -35,6 +35,9 @@ const acceptFriendRequestRouter = require('./routes/acceptFriendRequest')
 const declineFriendRequestRouter = require('./routes/declineFriendRequest')
 const matchHistoryRouter = require('./routes/matchHistory')
 const saveMatchResultRouter = require('./routes/saveMatchResult')
+const getCoinsRouter = require('./routes/getCoins')
+const getPointsRouter = require('./routes/getPoints')
+const getRankingList = require('./routes/getRankingList')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
@@ -45,6 +48,12 @@ app.use('/acceptFriendRequest',acceptFriendRequestRouter)
 app.use('/declineFriendRequest',declineFriendRequestRouter)
 app.use('/matchHistory',matchHistoryRouter)
 app.use('/saveMatchResult',saveMatchResultRouter)
+app.use('/getCoins',getCoinsRouter)
+app.use('/getPoints',getPointsRouter)
+app.use('/getRankingList',getRankingList)
+
+
+
 const server = app.listen(process.env.PORT || 3000)
 
 io.attach(server);
