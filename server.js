@@ -38,6 +38,7 @@ const saveMatchResultRouter = require('./routes/saveMatchResult')
 const getCoinsRouter = require('./routes/getCoins')
 const getPointsRouter = require('./routes/getPoints')
 const getRankingList = require('./routes/getRankingList')
+const buyItemRouter = require('./routes/buyItem')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
@@ -51,6 +52,7 @@ app.use('/saveMatchResult',saveMatchResultRouter)
 app.use('/getCoins',getCoinsRouter)
 app.use('/getPoints',getPointsRouter)
 app.use('/getRankingList',getRankingList)
+app.use('/buyItem',buyItemRouter)
 
 
 

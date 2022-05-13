@@ -1,0 +1,7 @@
+POST http://localhost:3000/buyItem
+Content-Type: application/json
+
+{
+    "nickname": "jorge",
+    "nombre": "BoardMarron"
+}
