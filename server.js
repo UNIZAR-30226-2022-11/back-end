@@ -39,6 +39,7 @@ const getCoinsRouter = require('./routes/getCoins')
 const getPointsRouter = require('./routes/getPoints')
 const getRankingList = require('./routes/getRankingList')
 const buyItemRouter = require('./routes/buyItem')
+const getShopRouter =require('./routes/getShop')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
@@ -53,7 +54,7 @@ app.use('/getCoins',getCoinsRouter)
 app.use('/getPoints',getPointsRouter)
 app.use('/getRankingList',getRankingList)
 app.use('/buyItem',buyItemRouter)
-
+app.use('/getShop',getShopRouter)
 
 
 const server = app.listen(process.env.PORT || 3000)

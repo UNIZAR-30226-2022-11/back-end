@@ -32,6 +32,12 @@ class Store {
     
       return true
     }
+    //Funcion que devuelve todos los articulos de un usuario
+    static async getInventory(nickname) {
+      let getInventoryQuery =  "SELECT  ARTICULO_nombre FROM compra WHERE USUARIO_Nickname = \"" + nickname + "\" ";
+      let articulos = await query(getInventoryQuery)
+      return articulos;
+    }
 }
 
 function isObjEmpty(obj) {
