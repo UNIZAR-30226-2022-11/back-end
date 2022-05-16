@@ -9,7 +9,7 @@ const User = require('../models/user')
 //     let amigos = User.getFriends(req.body.Nickname)
 //     res.send(amigos)
 //  })
-router.get('/',async  (req,res) => {
+router.get('/', myPassport.checkAuthenticated, async  (req,res) => {
     console.log("Listado amigos")
     let amigos =  await User.getFriends(req.query.nickname)
     res.send(amigos)
