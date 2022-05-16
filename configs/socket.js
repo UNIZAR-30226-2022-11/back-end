@@ -27,6 +27,12 @@ io.on('connection', socket => {
         console.log("Ha llegado sendGameMove, enviando movimiento: " +moveFI + ", " + moveCI + ", ", moveFF + ", ", moveCF + " a jugador " + opponent)
         socket.to(opponent).emit('getGameMove', { op: opponent, fI: moveFI, cI: moveCI, fF: moveFF, cF: moveCF})
     })
+
+    socket.on('sendMessage', (opponent, message) =>{
+        //Enviamos movimiento al oponente
+        console.log("Ha llegado sendMessage, enviando mensaje: " + message + " a jugador " + opponent)
+        socket.to(opponent).emit('getMessage', { msg: message })
+    })
 })
 
 module.exports = io
