@@ -7,7 +7,7 @@ const Store = require('../models/store')
 router.get('/', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     //console.log("Se van ha devolver la solicitudes pendientes del usuario "+ req.query.nickname)
-    let articulo = await Store.getInventory(req.query.nickname)
+    let articulo = { "articulos" : await Store.getInventory(req.query.nickname)}
     console.log(articulo)
     res.send(articulo)
 })

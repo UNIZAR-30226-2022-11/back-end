@@ -34,13 +34,13 @@ class Store {
     }
     //Funcion que devuelve todos los articulos de un usuario
     static async getInventory(nickname) {
-      let getInventoryQuery =  "SELECT  ARTICULO_nombre FROM compra WHERE USUARIO_Nickname = \"" + nickname + "\" ";
+      let getInventoryQuery =  "SELECT  c.ARTICULO_nombre,a.tipo FROM compra c,articulo a WHERE USUARIO_Nickname = \"" + nickname + "\" AND c.ARTICULO_nombre = a.nombre ";
       let articulos = await query(getInventoryQuery)
       return articulos;
     }
     //Funcion que devuelve los articulos en tienda que no tiene el usuario
     static async getShop(nickname){
-      let getShopQuery = "SELECT nombre from articulo WHERE nombre NOT IN(SELECT  ARTICULO_nombre FROM compra WHERE USUARIO_Nickname = \"" + nickname + "\" )";
+      let getShopQuery = "SELECT nombre,tipo,precio from articulo WHERE nombre NOT IN(SELECT  ARTICULO_nombre FROM compra WHERE USUARIO_Nickname = \"" + nickname + "\" )";
       let tienda = await query(getShopQuery)
       return tienda
     }
