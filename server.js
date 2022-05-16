@@ -40,6 +40,7 @@ const getPointsRouter = require('./routes/getPoints')
 const getRankingList = require('./routes/getRankingList')
 const buyItemRouter = require('./routes/buyItem')
 const getShopRouter =require('./routes/getShop')
+const getInventoryRouter =require('./routes/getInventory')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
@@ -55,6 +56,7 @@ app.use('/getPoints',getPointsRouter)
 app.use('/getRankingList',getRankingList)
 app.use('/buyItem',buyItemRouter)
 app.use('/getShop',getShopRouter)
+app.use('/getInventory',getInventoryRouter)
 
 
 const server = app.listen(process.env.PORT || 3000)
