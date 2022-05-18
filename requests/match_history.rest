@@ -1,1 +1,1 @@
-GET http://localhost:3000/matchHistory?nickname=pedro
+GET http://localhost:3000/getMatchHistory?nickname=jorge

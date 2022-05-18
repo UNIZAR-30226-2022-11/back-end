@@ -7,7 +7,7 @@ const User = require('../models/user')
 router.get('/', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     //console.log("Se van ha devolver la solicitudes pendientes del usuario "+ req.query.nickname)
-    let points = await User.getPoints(req.query.nickname)
+    let points = { "points" : await User.getPoints(req.query.nickname)}
     console.log(points)
     res.send(points)
 })

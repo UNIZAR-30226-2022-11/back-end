@@ -5,6 +5,7 @@ const myPassport = require('../configs/passport')
 const User = require('../models/user')
 
 router.post('/', myPassport.checkNotAuthenticated, passport.authenticate('local'), async (req, res) => {
+    let respuesta = {}
     res.send(await User.getUserByNickname(req.body.nickname))
 })
 

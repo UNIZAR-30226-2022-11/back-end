@@ -28,7 +28,7 @@ class Match {
                     "empate": empate
                 })
             }
-            //console.log(respuesta)
+            console.log(respuesta)
             return respuesta
         }
     }

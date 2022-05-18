@@ -7,8 +7,8 @@ const User = require('../models/user')
 router.get('/', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     //console.log("Se van ha devolver la solicitudes pendientes del usuario "+ req.query.nickname)
-    let coins = await User.getRankingList(req.query.nickname)
-    console.log(coins)
-    res.send(coins)
+    let ranking = { "rankingList" : await User.getRankingList(req.query.nickname)}
+    console.log(ranking)
+    res.send(ranking)
 })
 module.exports = router

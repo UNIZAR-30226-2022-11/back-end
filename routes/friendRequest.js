@@ -7,7 +7,8 @@ const User = require('../models/user')
 router.get('/', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     //console.log("Se van ha devolver la solicitudes pendientes del usuario "+ req.query.nickname)
-    res.send(await User.getFriendsRequests(req.query.nickname))
+    let respuesta = {"friendRequests":await User.getFriendsRequests(req.query.nickname)}
+    res.send(respuesta)
 })
 
 //Añade al usuario amigo la solicitud de amistad de nickname
