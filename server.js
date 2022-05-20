@@ -51,7 +51,7 @@ const points = require('./routes/points')
 const updateTableroRouter = require('./routes/updateTable')
 const updateAvatarRouter = require('./routes/updateAvatar')
 const updatePiecesRouter = require('./routes/updatePieces')
-
+const logOutRouter = require('./routes/logout')
 
 
 
@@ -76,6 +76,7 @@ app.use('/getShop',getShopRouter)
 app.use('/shop',ShopRouter)
 app.use('/inventory',inventoryRouter)
 app.use('/getInventory',getInventoryRouter)
+app.use('/logOut',logOutRouter)
 
 app.use('/updateAvatar',updateAvatarRouter)
 app.use('/updateTable',updateTableroRouter)
