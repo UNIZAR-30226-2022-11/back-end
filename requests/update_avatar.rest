@@ -1,0 +1,7 @@
+POST http://localhost:3000/updateTable
+Content-Type: application/json
+
+{
+    "nickname": "pedroaibar23",
+    "table": "hola"
+}

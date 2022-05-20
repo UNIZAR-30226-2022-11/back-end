@@ -229,6 +229,28 @@ class User {
     console.log(respuesta)
     return respuesta
   }
+  //Funcion para actualizar el avatar,tablero o pieza de un usuario
+  static async updateObjets(nickname,name,type){
+    if(type == "avatar"){
+      console.log("Actualizando avatar...")
+      let updateAvatar = "UPDATE usuario SET avatar= \"" + name + "\" WHERE Nickname = \"" + nickname + "\" "
+      let update = await query(updateAvatar)
+      return true
+    }
+    else if ( type == "tablero") {
+      let updateTablero = "UPDATE usuario SET tablero= \"" + name + "\" WHERE Nickname = \"" + nickname + "\" "
+      let update = await query(updateTablero)
+      return true
+    }
+    else if (type == "piezas" ){
+      let updatePiezas = "UPDATE usuario SET piezas= \"" + name + "\" WHERE Nickname = \"" + nickname + "\" "
+      let update = await query(updatePiezas)
+      return true
+    }
+    return false
+  }
+
+  
 }
 let query = function( sql, values ) {
   // devolver una promesa

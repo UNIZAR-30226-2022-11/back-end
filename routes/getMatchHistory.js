@@ -5,7 +5,8 @@ const Match = require('../models/match')
 
 router.get('/', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(await Match.getMatchHistory(req.query.nickname))
+    let respuesta = { "matchHistory":  await Match.getMatchHistory(req.query.nickname)}
+    res.send(respuesta)
 })
 
 router.post('/', async (req, res) => {
