@@ -60,7 +60,7 @@ class User {
     let vacio = isObjEmpty(rows)
     if (vacio == false){
       //console.log(rows)
-      const user = new User({
+        const user = new User({
         nickname: rows[0].Nickname,
         password: rows[0].contraseña,
         puntos: rows[0].puntos,
