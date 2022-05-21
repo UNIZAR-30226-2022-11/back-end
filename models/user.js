@@ -131,7 +131,7 @@ class User {
           return "El usuario existe pero ya es amigo tuyo"
         }
         else{
-          sql = "INSERT INTO peticiones_amigos (USUARIO_Nickname,valor ) VALUES (\""+user+"\", \""+friend+"\");"
+          sql = "INSERT INTO peticiones_amigos (valor ,USUARIO_Nickname) VALUES (\""+user+"\", \""+friend+"\");"
           result  = await query(sql)
           console.log("Enviada solicitud de amistad")
           return "La solicitud se ha mandado correctamente"
@@ -148,7 +148,7 @@ class User {
   static async acceptFriendRequest(user,friend){
     console.log("Se va a intentar aceptar la solicitud de amistad de " + friend + " como amigo de " + user)
     
-    let existePeticion = await this.getFriendsRequests(user)
+    let existePeticion = await this.getFriendsRequests(friend)
     if(existePeticion != null ){
           let queryAddFriend1 = "INSERT INTO amigos (valor, USUARIO_Nickname) VALUES (\""+user+"\", \""+friend+"\") ;"
           let queryAddFriend2 = "INSERT INTO amigos (USUARIO_Nickname,valor) VALUES (\""+user+"\", \""+friend+"\") ;"
@@ -164,7 +164,7 @@ class User {
     }
   }
   static async declineFriendRequest(user,friend){
-    let existePeticion = await this.getFriendsRequests(user)
+    let existePeticion = await this.getFriendsRequests(friend)
     if(existePeticion != null ){
       let queryDeleteRequest = "DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + user + "\" AND valor=\"" + friend + "\"" 
       let deleteRequest = await query(queryDeleteRequest)

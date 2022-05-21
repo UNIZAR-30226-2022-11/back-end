@@ -1,7 +1,7 @@
-POST http://localhost:3000/getFriendRequest
+POST http://ec2-18-206-137-85.compute-1.amazonaws.com:3000/getFriendRequest
 Content-Type: application/json
 
 {
-    "nickname": "pedroaibar123",
-    "amigo": "pedro"
+    "nickname": "a",
+    "amigo": "c"
 }
