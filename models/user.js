@@ -131,7 +131,7 @@ class User {
           return "El usuario existe pero ya es amigo tuyo"
         }
         else{
-          sql = "INSERT INTO peticiones_amigos (valor, USUARIO_Nickname) VALUES (\""+user+"\", \""+friend+"\");"
+          sql = "INSERT INTO peticiones_amigos (USUARIO_Nickname,valor ) VALUES (\""+user+"\", \""+friend+"\");"
           result  = await query(sql)
           console.log("Enviada solicitud de amistad")
           return "La solicitud se ha mandado correctamente"
