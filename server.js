@@ -52,7 +52,7 @@ const updateTableroRouter = require('./routes/updateTable')
 const updateAvatarRouter = require('./routes/updateAvatar')
 const updatePiecesRouter = require('./routes/updatePieces')
 const logOutRouter = require('./routes/logout')
-
+const getBoardRouter = require('./routes/getBoard')
 
 
 app.use(indexRouter)
@@ -81,6 +81,7 @@ app.use('/logOut',logOutRouter)
 app.use('/updateAvatar',updateAvatarRouter)
 app.use('/updateTable',updateTableroRouter)
 app.use('/updatePieces',updatePiecesRouter)
+app.use('/getBoard',getBoardRouter)
 
 const server = app.listen(process.env.PORT || 3000)
 

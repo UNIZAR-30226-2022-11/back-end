@@ -249,7 +249,10 @@ class User {
     }
     return false
   }
-
+  static async getBoard(nickname){
+    let boardQuery = "SELECT tablero FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    return await query(boardQuery)
+  }
   
 }
 let query = function( sql, values ) {
