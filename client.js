@@ -1,21 +1,27 @@
 const io = require("socket.io-client")
-const socket = io("http://localhost:4000")
+const socket = io("http://localhost:3000")
 
 opponent = "";
 socket.on('connect',() =>{
+    //console.log(socket.connected);
+    nickname = "jorge"
+    gameMode = "3"
+    socket.emit('buscarPartida', socket.id, nickname, gameMode)
 })
 
 
 socket.on('getOpponent', message => {
-    opponent = message
-    console.log("Recivido oponente")
-    console.log(opponent)
+    //opponent = message.id
+    console.log("Recivido oponente "+ opponent + " cuyo nickname es " + message.opNick)
+    //console.log(opponent)
 })
 
 socket.on('getGameMove', message => {
     console.log("Movimiento recivido " + message)
 })
-
+socket.on('oponenteDesconectado', message => {
+    console.log("OponenteDesconectado" + message)
+})
 
 function asd(){
     move = "34-55"
@@ -26,3 +32,21 @@ function asd(){
 if(process.argv.slice(2)[0] != 0){
     setInterval(asd, 10*1000);
 }
+
+
+
+
+
+/*socket.on('RespuestaConexion', message => {
+    console.log("RespuestaConexion recivido " + message)
+})
+
+//Comprobar conexion
+function comprobar(){
+    console.log("Enviando ComprobarConexion: a " + opponent)
+    socket.emit('ComprobarConexion', opponent)
+    
+}
+if(process.argv.slice(2)[0] != 0){
+    setInterval(comprobar, 5*1000);
+}*/
