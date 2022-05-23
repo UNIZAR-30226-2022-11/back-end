@@ -6,10 +6,10 @@
 const io = require('socket.io')()
 
 //let jugadoresEspera = []
-let oponentes = new Map() //Clave: nickname1    Valor: nickname2
-let nicknames = new Map() //Clave: socketId     Valor: nickname
-let sockets = new Map() //Necesitamos sacar socket de oponente, es decir Clave: nickname Valor: socket
-let timeouts = new Map()
+let oponentes = new Map()   //Clave: nickname1  Valor: nickname2
+let nicknames = new Map()   //Clave: socketId   Valor: nickname
+let sockets = new Map()     //Clave: nickname   Valor: socketId
+let timeouts = new Map()    //Clave: nickname   Valor: timeoutId
 let espera3 = []
 let espera10 = []
 let espera30 = []
@@ -28,20 +28,14 @@ io.on('connection', socket => {
         sockets.set(nickname, socket.id)
         //Ver si jugador esta en partida activa
         if(oponentes.get(nickname)){
-            
-
-            //Le mandaras el getOpponent cuando tengas el tablero
             clearTimeout(timeouts.get(nickname)); //Se elimina el timeout
             timeouts.delete(nickname)
 
+            //Enviar a oponente enviarTablero
+            socket.to(sockets.get(oponentes.get(nickname))).emit('enviarTablero')
+
         }
         else{
-            //Ver si nickname
-            //oponentes.get(nickname)
-            //si esta (a llegado antes de los 20s)
-                //cambiar la entrada de oponentes (ojo no se añada en vez de eliminar la anterior)
-            //si no
-
             switch (gameMode){
                 case "3":
                     jugador = espera3.pop()
@@ -85,10 +79,16 @@ io.on('connection', socket => {
                 oponentes.set(jugador, nickname)
 
                 
-                socket.emit('getOpponent', { opNick: jugador, side: 0 })
-                socket.to(sockets.get(jugador)).emit('getOpponent', { opNick: nickname, side: 1 })
+                socket.emit('getOpponent', { opNick: jugador, side: 0, tablero: 0 })
+                socket.to(sockets.get(jugador)).emit('getOpponent', { opNick: nickname, side: 1, tablero: 0 })
             }
         }
+    })
+
+    socket.on('recibirTablero', (lado, tablero) =>{
+        console.log("recibirTablero")
+        //Añadir campo tablero en getOpponent
+        socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('getOpponent', { opNick: oponentes.get(nicknames.get(socket.id)), side: lado, board: tablero })
     })
     
     socket.on('sendGameMove', (moveFI, moveCI, moveFF, moveCF) =>{
@@ -98,29 +98,10 @@ io.on('connection', socket => {
     })
 
     socket.on('sendMessage', (message) =>{
-        //Enviamos movimiento al oponente
+        //Enviamos mensaje al oponente
         console.log("Ha llegado sendMessage, enviando mensaje: " + message + " a jugador " + oponentes.get(socket.id))
         socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('getMessage', { msg: message })
     })
-
-
-    /*socket.on('ComprobarConexion', (msg) => {
-        console.log("Ha llegado ComprobarConexion")
-        
-        console.log(io.sockets.adapter.rooms)
-        //Oponente
-        let oponente = oponentes.get(socket.id)
-        let vivo = io.sockets.adapter.rooms.get(oponente)
-        if(typeof vivo == 'undefined'){
-            socket.emit('RespuestaConexion', { res: false })
-        }
-        else{
-            socket.emit('RespuestaConexion', { res: true })
-        }
-        
-        
-        //socket.to(opponent).emit('RespuestaConexion');
-    })*/
 
     function isAlive(player){
         console.log("isAlive")
@@ -132,33 +113,13 @@ io.on('connection', socket => {
         //Enviar a op que usuario desconectado
         socket.to(sockets.get(op)).emit('oponenteDesconectado');
         //Eliminar entradas sockets y nicknames de op, partida a acabado
+        nicknames.delete(sockets.get(op))
+        sockets.delete(op)
     }
 
     socket.on("disconnecting", () => {
         console.log("disconnecting")
-        //console.log("Se desconecta " + socket.rooms[0])
-        //console.log(socket.rooms)
-        //console.log(oponentes.get(socket.rooms))
 
-        /*socket.rooms.forEach((value) => {
-            socket.to(sockets.get(oponentes.get(nicknames.get(value)))).emit('oponenteDesconectado');
-            /*console.log(value)
-            setTimeout(function(value){
-                console.log(value);
-            }, 2000);
-            //Borrar de nicknames y sockets
-            
-            
-            console.log("value " + value)
-        });
-        console.log("socket " + socket.id)*/
-        //console.log(oponentes.size);
-        //Enviar a oponente
-        
-        //console.log(socket.rooms); // the Set contains at least the socket ID
-
-
-        //socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('oponenteDesconectado');
         let nick = nicknames.get(socket.id)
         sockets.delete(nick)
         nicknames.delete(socket.id)
@@ -166,15 +127,6 @@ io.on('connection', socket => {
         const timeoutId = setTimeout(isAlive, 20000, nick)
         timeouts.set(nick, timeoutId)
     });
-
-
-    /*setInterval(() => {
-        socket.timeout(5000).emit('latido', (err) => {
-            if (err) {
-              // the client did not acknowledge the event in the given delay
-            }
-        });
-    }, 100);*/
 })
 
 module.exports = io
