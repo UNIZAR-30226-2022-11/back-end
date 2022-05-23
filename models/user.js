@@ -254,7 +254,7 @@ class User {
     return await query(boardQuery)
   }
   static async getAvatar(nickname){
-    let boardAvatar = "SELECT avatar FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    let boardAvatar = "SELECT avatar,tablero FROM usuario WHERE Nickname = \"" + nickname + "\" "
     return await query(boardAvatar)
   }
   static async getPieces(nickname){
