@@ -253,6 +253,14 @@ class User {
     let boardQuery = "SELECT tablero FROM usuario WHERE Nickname = \"" + nickname + "\" "
     return await query(boardQuery)
   }
+  static async getAvatar(nickname){
+    let boardAvatar = "SELECT avatar FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    return await query(boardAvatar)
+  }
+  static async getPieces(nickname){
+    let boardPieces= "SELECT piezas FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    return await query(boardPieces)
+  }
   
 }
 let query = function( sql, values ) {
