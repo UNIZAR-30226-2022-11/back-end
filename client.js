@@ -4,9 +4,9 @@ const socket = io("http://localhost:3000")
 opponent = "";
 socket.on('connect',() =>{
     //console.log(socket.connected);
-    nickname = "jorge"
+    nickname = process.argv.slice(3)[0]
     gameMode = "3"
-    socket.emit('buscarPartida', socket.id, nickname, gameMode)
+    socket.emit('buscarPartida', nickname, gameMode)
 })
 
 
@@ -43,8 +43,8 @@ if(process.argv.slice(2)[0] != 0){
 
 //Comprobar conexion
 function comprobar(){
-    console.log("Enviando ComprobarConexion: a " + opponent)
-    socket.emit('ComprobarConexion', opponent)
+    console.log("Enviando ComprobarConexion")
+    socket.emit('ComprobarConexion')
     
 }
 if(process.argv.slice(2)[0] != 0){
