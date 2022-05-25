@@ -148,7 +148,7 @@ class User {
   static async acceptFriendRequest(user,friend){
     console.log("Se va a intentar aceptar la solicitud de amistad de " + friend + " como amigo de " + user)
     
-    let existePeticion = await this.getFriendsRequests(friend)
+    let existePeticion = await this.getFriendsRequests(user)
     if(existePeticion != null ){
           let queryAddFriend1 = "INSERT INTO amigos (valor, USUARIO_Nickname) VALUES (\""+user+"\", \""+friend+"\") ;"
           let queryAddFriend2 = "INSERT INTO amigos (USUARIO_Nickname,valor) VALUES (\""+user+"\", \""+friend+"\") ;"
