@@ -152,7 +152,7 @@ class User {
     if(existePeticion != null ){
           let queryAddFriend1 = "INSERT INTO amigos (valor, USUARIO_Nickname) VALUES (\""+user+"\", \""+friend+"\") ;"
           let queryAddFriend2 = "INSERT INTO amigos (USUARIO_Nickname,valor) VALUES (\""+user+"\", \""+friend+"\") ;"
-          let queryDeleteRequest = "DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + user + "\" "
+          let queryDeleteRequest = "DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + user + "\"  AND valor=\"" + friend + "\""
           let deleteRequest = await query(queryDeleteRequest)
           let esAmigo = await query(queryAddFriend1)
           let esAmigo1 = await query(queryAddFriend2)
