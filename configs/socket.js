@@ -10,6 +10,7 @@ let oponentes = new Map()   //Clave: nickname1  Valor: nickname2
 let nicknames = new Map()   //Clave: socketId   Valor: nickname
 let sockets = new Map()     //Clave: nickname   Valor: socketId
 let timeouts = new Map()    //Clave: nickname   Valor: timeoutId
+let avatars = new Map()    //Clave: nickname    Valor: avatar
 let espera3 = []
 let espera10 = []
 let espera30 = []
@@ -21,11 +22,13 @@ io.on('connection', socket => {
     console.log('new connection');
     console.log(socket.id)
     
-    socket.on('buscarPartida', (nickname, gameMode) => {
+    socket.on('buscarPartida', (nickname, gameMode, avatar, friend) => {
         let jugador
 
         nicknames.set(socket.id, nickname)
         sockets.set(nickname, socket.id)
+        avatars.set(nickname, avatar)
+
         //Ver si jugador esta en partida activa
         if(oponentes.get(nickname)){
             clearTimeout(timeouts.get(nickname)); //Se elimina el timeout
@@ -64,6 +67,12 @@ io.on('connection', socket => {
                         esperaNoTiempo.push(nickname)
                         //nicknames.set(id, nickname)
                     }
+                    break
+                case "A":
+                    if(sockets.get(friend)){ //El amigo ya esta
+                        jugador = friend
+                    }
+                    
                     break
                 default:
                     console.log("Modo de juego no reconocido")
@@ -115,6 +124,7 @@ io.on('connection', socket => {
         //Eliminar entradas sockets y nicknames de op, partida a acabado
         nicknames.delete(sockets.get(op))
         sockets.delete(op)
+        avatars.delete(op)
     }
 
     socket.on("disconnecting", () => {
@@ -123,6 +133,7 @@ io.on('connection', socket => {
         let nick = nicknames.get(socket.id)
         sockets.delete(nick)
         nicknames.delete(socket.id)
+        avatars.delete(nick)
         
         const timeoutId = setTimeout(isAlive, 20000, nick)
         timeouts.set(nick, timeoutId)
