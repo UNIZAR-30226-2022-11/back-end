@@ -13,7 +13,7 @@ socket.on('connect',() =>{
 socket.on('getOpponent', message => {
     //opponent = message.id
     console.log("Recivido oponente "+ opponent + " cuyo nickname es " + message.opNick)
-    //console.log(opponent)
+    console.log(message.load)
 })
 
 socket.on('getGameMove', message => {

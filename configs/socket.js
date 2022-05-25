@@ -79,16 +79,16 @@ io.on('connection', socket => {
                 oponentes.set(jugador, nickname)
 
                 
-                socket.emit('getOpponent', { opNick: jugador, side: 0, tablero: 0 })
-                socket.to(sockets.get(jugador)).emit('getOpponent', { opNick: nickname, side: 1, tablero: 0 })
+                socket.emit('getOpponent', { opNick: jugador, side: 0, load: 0 })
+                socket.to(sockets.get(jugador)).emit('getOpponent', { opNick: nickname, side: 1, load: 0 })
             }
         }
     })
 
-    socket.on('recibirTablero', (lado, tablero) =>{
+    socket.on('recibirTablero', (lado, tablero, turno, timer1, timer2) =>{
         console.log("recibirTablero")
         //Añadir campo tablero en getOpponent
-        socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('getOpponent', { opNick: oponentes.get(nicknames.get(socket.id)), side: lado, board: tablero })
+        socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('getOpponent', { opNick: oponentes.get(nicknames.get(socket.id)), side: lado, load: 1, board: tablero, turn: turno, t1: timer1, t2: timer2 })
     })
     
     socket.on('sendGameMove', (moveFI, moveCI, moveFF, moveCF) =>{
