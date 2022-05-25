@@ -19,6 +19,12 @@ io.on('connection', socket => {
 
         socket.to(sockets.get(friend)).emit('getGameInvites', { nick: nickname })
     })
+
+    socket.on('confirmGameFriend', (nickname, friend) =>{
+        console.log("inviteFriend")
+
+        socket.to(sockets.get(friend)).emit('getFriendOpponent', { nick: nickname })
+    })
 })
 
 module.exports = io
