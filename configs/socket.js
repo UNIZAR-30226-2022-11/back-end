@@ -31,6 +31,8 @@ io.on('connection', socket => {
 
         //Ver si jugador esta en partida activa
         if(oponentes.get(nickname)){
+            console.log("Se va a recuperar el estado de " + nickname)
+            console.log("Se va a enviar un enviarTablero a " + oponentes.get(nickname) + " con socket.id " + sockets.get(oponentes.get(nickname)))
             clearTimeout(timeouts.get(nickname)); //Se elimina el timeout
             timeouts.delete(nickname)
 
@@ -94,10 +96,10 @@ io.on('connection', socket => {
         }
     })
 
-    socket.on('recibirTablero', (lado, tablero, turno, timer1) =>{
+    socket.on('recibirTablero', (lado, tablero, turno, timer1, timer2) =>{
         console.log("recibirTablero")
         //Añadir campo tablero en getOpponent
-        socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('getOpponent', { opNick: oponentes.get(nicknames.get(socket.id)), side: lado, avatar: avatars.get(oponentes.get(nicknames.get(socket.id))), load: 1, board: tablero, turn: turno, t1: timer1 })
+        socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('getOpponent', { opNick: oponentes.get(nicknames.get(socket.id)), side: lado, avatar: avatars.get(oponentes.get(nicknames.get(socket.id))), load: 1, board: tablero, turn: turno, t1: timer1, t2: timer2 })
     })
     
     socket.on('sendGameMove', (moveFI, moveCI, moveFF, moveCF) =>{

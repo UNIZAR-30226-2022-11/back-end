@@ -11,7 +11,8 @@ const myPassport = require('./configs/passport')
 const session = require('express-session')
 const cors = require('cors')
 const io = require('./configs/socket')
-const io_peticiones = require('./configs/socket_peticiones')
+require('./configs/socket_peticiones')
+require('./configs/socket_torneos')
 
 app.use(cors())
 app.use(session({
