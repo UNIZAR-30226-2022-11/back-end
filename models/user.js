@@ -194,6 +194,23 @@ class User {
       return fracaso
     }
   }
+  static async getRankingList(nickname){
+    var getRankingListTopQuery = "SELECT Nickname,puntos FROM usuario WHERE Nickname <> \"" + nickname + "\" GROUP BY Nickname ORDER BY puntos DESC LIMIT 3";
+    var getUser = "SELECT Nickname,puntos FROM usuario WHERE Nickname = \"" + nickname + "\" "
+    let listTop = await query(getRankingListTopQuery)
+    var getRankingListBottomQuery = "SELECT Nickname,puntos FROM usuario WHERE Nickname <>\"" + nickname + "\" AND Nickname <>\"" + listTop[0].Nickname  + "\" AND Nickname <>\"" + listTop[1].Nickname + "\" AND Nickname <>\"" + listTop[2].Nickname + "\"  GROUP BY Nickname ORDER BY puntos LIMIT 3";
+
+    let listBottom = await query(getRankingListBottomQuery)
+    let listUser = await query(getUser)
+    console.log(listTop)
+    let respuesta = [
+      listTop[0],listTop[1],listTop[2],
+      listUser[0],listBottom[2],listBottom[1],
+      listBottom[0]
+    ]
+    console.log(respuesta)
+    return respuesta
+  }
   static async getPoints(nickname){
     var pointsQuery = "SELECT puntos FROM usuario WHERE Nickname = \"" + nickname + "\" "
     const points = await query(pointsQuery)
@@ -213,22 +230,7 @@ class User {
       return fracaso
     }
   }
-  static async getRankingList(nickname){
-    var getRankingListTopQuery = "SELECT Nickname,puntos FROM usuario WHERE Nickname IN(SELECT valor FROM amigos WHERE USUARIO_Nickname=\"" + nickname + "\") GROUP BY Nickname ORDER BY puntos DESC LIMIT 3";
-    var getRankingListBottomQuery = "SELECT Nickname,puntos FROM usuario WHERE Nickname IN(SELECT valor FROM amigos WHERE USUARIO_Nickname=\"" + nickname + "\") GROUP BY Nickname ORDER BY puntos LIMIT 3";
-    var getUser = "SELECT Nickname,puntos FROM usuario WHERE Nickname = \"" + nickname + "\" "
-    let listTop = await query(getRankingListTopQuery)
-    let listBottom = await query(getRankingListBottomQuery)
-    let listUser = await query(getUser)
-    console.log(listTop[1])
-    let respuesta = [
-      listTop[0],listTop[1],listTop[2],
-      listUser[0],listBottom[2],listBottom[1],
-      listBottom[0]
-    ]
-    console.log(respuesta)
-    return respuesta
-  }
+
   //Funcion para actualizar el avatar,tablero o pieza de un usuario
   static async updateObjets(nickname,name,type){
     if(type == "avatar"){
