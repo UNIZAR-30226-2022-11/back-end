@@ -3,17 +3,19 @@ const socket = io("http://localhost:3000")
 
 opponent = "";
 socket.on('connect',() =>{
-    //console.log(socket.connected);
-    nickname = process.argv.slice(3)[0]
-    gameMode = "3"
-    socket.emit('buscarPartida', nickname, gameMode)
+    socket.emit('buscarPartida', process.argv.slice(3)[0], process.argv.slice(5)[0], "Avatar",process.argv.slice(4)[0])
 })
 
 
 socket.on('getOpponent', message => {
-    //opponent = message.id
-    console.log("Recivido oponente "+ opponent + " cuyo nickname es " + message.opNick)
-    console.log(message.load)
+    opponent = message.opNick
+    if(message.load){
+        console.log("Hay que recuperar el tablero")
+        console.log(message.board)
+    }
+    console.log("Recivido oponente "+ message.opNick)
+    console.log("Side: " + message.side)
+    console.log("Avatar: " + message.avatar)
 })
 
 socket.on('getGameMove', message => {
@@ -23,10 +25,25 @@ socket.on('oponenteDesconectado', message => {
     console.log("OponenteDesconectado" + message)
 })
 
+socket.on('enviarTablero', message => {
+    console.log("enviarTablero" + message)
+    let tablero = [
+        [
+            "salmon",
+            "halibut",
+        ],
+        [
+            "coral",
+            "reef",
+        ]
+    ];
+    socket.emit('recibirTablero', 0, tablero, 0, 0)
+})
+
 function asd(){
     move = "34-55"
     console.log("Enviando movimiento: " + move + " a " + opponent)
-    socket.emit('sendGameMove', move, opponent)
+    socket.emit('sendGameMove', move)
     
 }
 if(process.argv.slice(2)[0] != 0){

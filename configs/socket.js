@@ -88,7 +88,7 @@ io.on('connection', socket => {
                 oponentes.set(jugador, nickname)
 
                 
-                socket.emit('getOpponent', { opNick: jugador, side: 0, avatar: avatar, load: 0 })
+                socket.emit('getOpponent', { opNick: jugador, side: 0, avatar: avatars.get(jugador), load: 0 })
                 socket.to(sockets.get(jugador)).emit('getOpponent', { opNick: nickname, side: 1, avatar: avatar, load: 0 })
             }
         }
