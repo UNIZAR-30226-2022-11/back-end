@@ -18,7 +18,7 @@ class Match {
                 }
                 else{
                     rival = rows[i].Nickname_1
-                    ganador = rows[i].ganador
+                    ganador = Boolean(rows[i].ganador)
                 }
                 empate = rows[i].ganador == null
 
