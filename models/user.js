@@ -24,7 +24,7 @@ class User {
 
     await query("DELETE FROM amigos WHERE USUARIO_Nickname = \"" + _nickname + "\" OR valor = \"" + _nickname + "\"")
     await query("DELETE FROM peticiones_amigos WHERE USUARIO_Nickname = \"" + _nickname + "\" OR valor = \"" + _nickname + "\"")
-    await query("DELETE FROM juega WHERE USUARIO_Nickname = \"" + _nickname + "\"")
+   //await query("DELETE FROM partida WHERE USUARIO_Nickname = \"" + _nickname + "\"")
     //Creo que falta de alguna tabla
     await query("DELETE FROM usuario WHERE Nickname = \"" + _nickname + "\"")
   }

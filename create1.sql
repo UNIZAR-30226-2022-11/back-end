@@ -27,7 +27,14 @@ CREATE TABLE peticiones_amigos
    PRIMARY KEY (valor,USUARIO_Nickname),
    FOREIGN KEY (USUARIO_Nickname) REFERENCES usuario(Nickname)
 );
-
+CREATE TABLE torneo
+(
+   creador              VARCHAR(30),
+   jugadores  INT,
+   codigo VARCHAR(5)
+   PRIMARY KEY (creador),
+   FOREIGN KEY (creador) REFERENCES usuario(Nickname)
+);
 CREATE TABLE partida
 (
    id          INT AUTO_INCREMENT PRIMARY KEY,

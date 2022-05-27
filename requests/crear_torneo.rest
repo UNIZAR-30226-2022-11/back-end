@@ -1,0 +1,7 @@
+POST http://localhost:3000/crearTorneo
+Content-Type: application/json
+
+{
+    "nickname" : "Ochoa",
+    "codigo" : 0
+}
