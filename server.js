@@ -40,6 +40,7 @@ const getMatchHistory = require('./routes/getMatchHistory')
 const matchHistoryRouter = require('./routes/matchHistory')
 const saveMatchResultRouter = require('./routes/saveMatchResult')
 const getCoinsRouter = require('./routes/getCoins')
+const crearTorneoRouter = require('./routes/crearTorneo')
 
 const getPointsRouter = require('./routes/getPoints')
 const getRankingList = require('./routes/getRankingList')
@@ -57,7 +58,11 @@ const logOutRouter = require('./routes/logout')
 const getBoardRouter = require('./routes/getBoard')
 const getAvatarRouter = require('./routes/getAvatar')
 const getPiecesRouter = require('./routes/getPieces')
-
+const borrarTorneoRouter = require('./routes/borrarTorneo')
+const entrarTorneoRouter = require('./routes/entrarTorneo')
+const obtenerTorneoRouter = require('./routes/obtenerTorneosPublicos')
+const comprobarCodigoTorneoRouter = require('./routes/comprobarCodigoTorneo')
+const resultadosTorneoRouter = require('./routes/resultadosTorneo')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
@@ -89,9 +94,12 @@ app.use('/getBoard',getBoardRouter)
 app.use('/getPieces',getBoardRouter)
 app.use('/getAvatar',getBoardRouter)
 
-
-
-
+app.use('/crearTorneo',crearTorneoRouter)
+app.use('/borrarTorneo',borrarTorneoRouter)
+app.use('/entrarTorneo',entrarTorneoRouter)
+app.use('/obtenerTorneos',obtenerTorneoRouter)
+app.use('/comprobarCodigoTorneo',comprobarCodigoTorneoRouter)
+app.use('/resultadosTorneo',resultadosTorneoRouter)
 const server = app.listen(process.env.PORT || 3000)
 
 io.attach(server);
