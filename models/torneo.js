@@ -46,7 +46,7 @@ class Torneo {
         }
     }
     static async obtenerTorneosPublicos(){
-        var sql = "SELECT creador,jugadores FROM torneo WHERE codigo = 0 "
+        var sql = "SELECT creador,jugadores FROM torneo WHERE codigo = '0'"
         let result  = await query(sql);
         return result
 
