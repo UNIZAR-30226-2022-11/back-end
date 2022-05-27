@@ -46,13 +46,13 @@ class Torneo {
         }
     }
     static async obtenerTorneosPublicos(){
-        var sql = "SELECT creador,jugadores FROM torneo WHERE codigo = 0 "
+        var sql = "SELECT creador,jugadores FROM torneo WHERE codigo = '0'"
         let result  = await query(sql);
         return result
 
     }
     static async comprobarCodigoTorneo(codigo){
-        var sql = "SELECT creador FROM torneo WHERE codigo =  " + codigo
+        var sql = "SELECT creador FROM torneo WHERE codigo =   \"" + codigo + "\" "
         let result  = await query(sql);
         if(!isObjEmpty(result)){
             var respuesta ={
