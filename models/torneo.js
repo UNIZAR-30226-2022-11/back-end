@@ -52,7 +52,7 @@ class Torneo {
 
     }
     static async comprobarCodigoTorneo(codigo){
-        var sql = "SELECT creador FROM torneo WHERE codigo =  " + codigo
+        var sql = "SELECT creador FROM torneo WHERE codigo =   \"" + codigo + "\" "
         let result  = await query(sql);
         if(!isObjEmpty(result)){
             var respuesta ={
