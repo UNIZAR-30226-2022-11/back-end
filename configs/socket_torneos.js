@@ -52,6 +52,10 @@ io.on('connection', socket => {
         socket.emit('recibirOrden')
     })
 
+    socket.on("eliminarTorneo", (owner) => {
+        torneos.delete(owner)
+    })
+
     
     socket.on("disconnecting", () => {
         console.log("disconnecting")
@@ -59,7 +63,6 @@ io.on('connection', socket => {
         
         //Eliminar info de los maps
         sockets.delete(nicknames.get(socket.id))
-        //partida.delete(nicknames.get(socket.id))
         nicknames.delete(socket.id)
     })
 })
