@@ -1,4 +1,8 @@
-const io = require('socket.io')(3002)
+const io = require('socket.io')(3002, {
+    cors: {
+        origin: ["http://localhost:4200"],
+    },
+})
 
 let sockets = new Map()
 let nicknames = new Map()
