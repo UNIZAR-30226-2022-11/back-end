@@ -51,6 +51,26 @@ class Torneo {
         return result
 
     }
+    static async comprobarCodigoTorneo(codigo){
+        var sql = "SELECT creador FROM torneo WHERE codigo =  " + codigo
+        let result  = await query(sql);
+        if(!isObjEmpty(result)){
+            var respuesta ={
+                "exito": true,
+                "creador": result[0].creador
+            }
+            return respuesta
+        }
+        else{
+            var respuesta ={
+                "exito": false,
+                "creador": ""
+            }
+            return respuesta
+        }
+    }
+
+    
 }
 
 function isObjEmpty(obj) {

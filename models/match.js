@@ -63,6 +63,11 @@ class Match {
             return false
         }
     }
+    static async ganadoresTorneo(primero,segundo){
+        this.updateCoinsPoints(primero,15,0)
+        this.updateCoinsPoints(segundo,10,0)
+
+    }
 }
 
 function isObjEmpty(obj) {
