@@ -137,7 +137,7 @@ io.on('connection', socket => {
         nicknames.delete(socket.id)
         avatars.delete(nick)
         
-        const timeoutId = setTimeout(isAlive, 20000, nick)
+        const timeoutId = setTimeout(isAlive, 30000, nick)
         timeouts.set(nick, timeoutId)
     });
 })
