@@ -59,6 +59,8 @@ const getBoardRouter = require('./routes/getBoard')
 const getAvatarRouter = require('./routes/getAvatar')
 const getPiecesRouter = require('./routes/getPieces')
 const borrarTorneoRouter = require('./routes/borrarTorneo')
+const entrarTorneoRouter = require('./routes/entrarTorneo')
+const obtenerTorneoRouter = require('./routes/obtenerTorneosPublicos')
 
 app.use(indexRouter)
 app.use('/login', loginRouter)
@@ -92,7 +94,8 @@ app.use('/getAvatar',getBoardRouter)
 
 app.use('/crearTorneo',crearTorneoRouter)
 app.use('/borrarTorneo',borrarTorneoRouter)
-
+app.use('/entrarTorneo',entrarTorneoRouter)
+app.use('/obtenerTorneos',obtenerTorneoRouter)
 
 const server = app.listen(process.env.PORT || 3000)
 

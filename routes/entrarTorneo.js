@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     console.log(req.body.nickname, req.body.amigo)
     res.setHeader('Content-Type', 'application/json');
     respuesta = {
-        "exito": await Torneo.borrarTorneo(req.body.nickname)
+        "exito": await Torneo.entrarTorneo(req.body.nickname, req.body.codigo)
     }
     res.send(respuesta)
 })

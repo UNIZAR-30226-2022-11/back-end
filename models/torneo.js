@@ -14,7 +14,8 @@ class Torneo {
        
     }
     static async borrarTorneo(nickname){
-        var sql = "DELETE FROM torneo WHERE Nickname = \"" + nickname + "\" "
+        var sql = "DELETE FROM torneo WHERE creador = \"" + nickname + "\" "
+        let result  = await query(sql);
         if(!isObjEmpty(result)){
             return true
         }
@@ -22,6 +23,33 @@ class Torneo {
             return false
         }
         
+    }
+    static async entrarTorneo(nickname){
+        var sql = "SELECT jugadores FROM torneo WHERE creador = \"" + nickname + "\" "
+        let result  = await query(sql);
+        var jugadores = result[0].jugadores
+        console.log(jugadores)
+        if(!isObjEmpty(result)){
+            if(jugadores < 4){
+                jugadores++;
+                console.log("Numero de jugadores " +  jugadores)
+                sql=  "UPDATE torneo SET jugadores =  " + jugadores + "  WHERE creador = \"" + nickname + "\" "
+                result  = await query(sql);
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        else{
+            return false
+        }
+    }
+    static async obtenerTorneosPublicos(){
+        var sql = "SELECT creador,jugadores FROM torneo WHERE codigo = 0 "
+        let result  = await query(sql);
+        return result
+
     }
 }
 

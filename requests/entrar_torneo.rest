@@ -1,0 +1,6 @@
+POST http://localhost:3000/entrarTorneo
+Content-Type: application/json
+
+{
+    "nickname" : "pedro"
+}
