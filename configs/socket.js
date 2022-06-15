@@ -114,6 +114,36 @@ io.on('connection', socket => {
         socket.to(sockets.get(oponentes.get(nicknames.get(socket.id)))).emit('getMessage', { msg: message })
     })
 
+    socket.on('sendAcabar', (nick, abandono) =>{
+        let op = oponentes.get(nick)
+        //Eliminar del map ambas entradas
+        oponentes.delete(op)
+        oponentes.delete(player)
+        //Si es por abandono enviar a op que oponente desconectado
+        if(abandono) { socket.to(sockets.get(op)).emit('oponenteDesconectado'); }
+        //Si esta en alguna lista de espera de partidas eliminarlo
+        if(espera3[0] == nick){
+            espera3.pop()
+        }
+        if(espera10[0] == nick){
+            espera10.pop()
+        }
+        if(espera30[0] == nick){
+            espera30.pop()
+        }
+        if(esperaNoTiempo[0] == nick){
+            esperaNoTiempo.pop()
+        }
+        
+        nicknames.delete(sockets.get(op))
+        sockets.delete(op)
+        avatars.delete(op)
+
+        sockets.delete(nick)
+        nicknames.delete(socket.id)
+        avatars.delete(nick)
+    })
+
     function isAlive(player){
         console.log("isAlive")
         
